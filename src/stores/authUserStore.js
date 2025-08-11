@@ -14,9 +14,9 @@ const authUserStore = create((set) => ({
       console.log("No access token yet.");
       return;
     }
-    console.log(accessToken)
     try {
       set({ checkingAuth: true });
+      console.log("token",accessToken)
       const res = await axiosInstance.get("/me", {
         headers: {
           Authorization: `Bearer ${accessToken}`,

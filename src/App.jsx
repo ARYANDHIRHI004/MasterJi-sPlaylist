@@ -10,7 +10,9 @@ import { LoaderCircleIcon } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { authUser, checkingAuth, getCurrenUser, accessToken } = authUserStore();
+  const accessToken = localStorage.getItem("access_token");
+  const { authUser, checkingAuth, getCurrenUser} = authUserStore();
+
 
   useEffect(() => {
     getCurrenUser();
@@ -27,15 +29,15 @@ const App = () => {
   return (
     <>
       <Toaster />
-      <Routes>
+      <Routes key={accessToken}>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={authUser ? <DashBoard /> : <Welcome />} />
+          <Route path="/" element={!authUser ? <Welcome />:<DashBoard />} />
           <Route
             path="/login"
             element={!authUser ? <LoginUser /> : <Navigate to={"/"} />}
           />
-          <Route path="/callback" element={<Callback />} />
         </Route>
+          <Route path="/callback" element={<Callback />} />
       </Routes>
     </>
   );

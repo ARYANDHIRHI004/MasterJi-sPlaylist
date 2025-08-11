@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import authUserStore from "../stores/authUserStore";
 
 const Callback = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { getCurrenUser } = authUserStore();
 
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const redirectUri = "http://127.0.0.1:5173/callback"; // Must match what you registered
@@ -48,9 +50,10 @@ const Callback = () => {
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
         localStorage.setItem("expires_in", data.expires_in);
-        // Redirect to home or dashboard
+        getCurrenUser();
         navigate("/");
       })
+
       .catch((err) => {
         console.error(err);
         setError("Failed to get access token.");
