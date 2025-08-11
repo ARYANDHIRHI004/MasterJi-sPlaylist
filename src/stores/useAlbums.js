@@ -12,3 +12,5 @@ const useAlbums = create((set) => ({
         }
     }
 }))
+
+export default useAlbums

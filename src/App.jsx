@@ -20,14 +20,14 @@ const App = () => {
 
   if (checkingAuth) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen ">
         <LoaderCircleIcon className="animate-spin" size={30} />
       </div>
     );
   }
 
   return (
-    <>
+    <div className=".no-scrollbar">
       <Toaster />
       <Routes key={accessToken}>
         <Route path="/" element={<Layout />}>
@@ -39,7 +39,7 @@ const App = () => {
         </Route>
           <Route path="/callback" element={<Callback />} />
       </Routes>
-    </>
+    </div >
   );
 };
 
