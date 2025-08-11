@@ -6,7 +6,7 @@ const useAlbums = create((set) => ({
 
     getSeveralAlbums: async () => {
         try {
-            1
+            
         } catch (error) {
             
         }
